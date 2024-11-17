@@ -1,15 +1,5 @@
 % Write MATLAB/Python function to compute modified Discrete Cosine Transform (MDCT).
-
 function X = mdct(x, N)
-    % Compute the Modified Discrete Cosine Transform (MDCT) of a signal.
-    %
-    % Parameters:
-    %   x - Input signal (1D array)
-    %   N - Block size for MDCT
-    %
-    % Returns:
-    %   X - MDCT coefficients (numFrames x N matrix)
-
     % Ensure the input is a row vector
     x = x(:)';  
     % Length of the input signal
@@ -18,13 +8,11 @@ function X = mdct(x, N)
     numFrames = floor(len / (2 * N));
     % Initialize output matrix
     X = zeros(numFrames, N);
-
     % Apply MDCT frame by frame
     for frame = 1:numFrames
         % Extract the current 2N segment
         startIdx = (frame - 1) * 2 * N + 1;
         segment = x(startIdx:startIdx + 2 * N - 1);
-
         % Compute the MDCT for this segment
         for k = 0:N-1
             sumVal = 0;
@@ -36,7 +24,6 @@ function X = mdct(x, N)
         end
     end
 end
-
 % Example usage
 x = randn(1, 1024);  % Random signal with 1024 samples
 N = 256;             % Block size
